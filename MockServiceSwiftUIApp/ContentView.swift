@@ -1,24 +1,17 @@
-//
-//  ContentView.swift
-//  MockServiceSwiftUIApp
-//
-//  Created by admin on 20/06/25.
-//
-
 import SwiftUI
 
-struct ContentView: View {
+struct UserView: View {
+    @StateObject private var viewModel = UserViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        VStack(spacing: 20) {
+            if let user = viewModel.user {
+                Text("👋 Hello, \(user.name)")
+                    .font(.title)
+            } else {
+                ProgressView("Loading User...")
+            }
         }
         .padding()
     }
-}
-
-#Preview {
-    ContentView()
 }
